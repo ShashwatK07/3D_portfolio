@@ -21,6 +21,9 @@ module.exports = {
       backgroundImage: {
         "hero-pattern": "url('/src/assets/herobg.png')",
       },
+      gradientColors: {
+        "blue-teal": ["#3490dc", "#38b2ac"],
+      },
     },
   },
   plugins: [],
