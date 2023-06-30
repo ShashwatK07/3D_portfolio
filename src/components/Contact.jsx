@@ -12,9 +12,39 @@ const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {};
-  const handleSubmit = (e) => {};
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    emailjs
+      .send(
+        "service_tdy0b3b",
+        "template_neionyo",
+        {
+          from_name: form.name,
+          to_name: "Shashwat",
+          from_email: form.email,
+          to_email: "shshwtkpr@gmail.com",
+          message: form.message,
+        },
+        "mUrV76Kh0mCktJzBa"
+      )
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank You , I'll get back to you.");
+          setForm({ name: "", email: "", message: "" });
+        },
+        function (err) {
+          setLoading(false);
+          console.log(err);
+          alert("Something went wrong!");
+        }
+      );
+  };
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
       <motion.div
@@ -60,7 +90,7 @@ const Contact = () => {
             </span>
             <textarea
               rows="7"
-              message="message"
+              name="message"
               value={form.message}
               onChange={handleChange}
               placeholder="What do you want to say ?"
